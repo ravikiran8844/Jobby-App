@@ -4,13 +4,20 @@ import {BsSearch} from 'react-icons/bs'
 import Header from '../Header'
 
 import './index.css'
+import JobItem from '../JobItem'
 
 export default class Jobs extends Component {
-  state = {profileData: []}
+  state = {profileData: [], jobsList: [], userAuthorized: ''}
 
   componentDidMount() {
     this.getProfileDetails()
     this.getJobs()
+  }
+
+  retry = () => {
+    this.getProfileDetails()
+    this.getJobs()
+    console.log('retry')
   }
 
   getProfileDetails = async () => {
@@ -22,6 +29,11 @@ export default class Jobs extends Component {
       method: 'GET',
     }
     const response = await fetch('https://apis.ccbp.in/profile', options)
+    if (response.ok) {
+      this.setState({userAuthorized: true})
+    } else {
+      this.setState({userAuthorized: false})
+    }
     const data = await response.json()
     const fetchedData = {
       name: data.profile_details.name,
@@ -43,10 +55,23 @@ export default class Jobs extends Component {
     }
     const response = await fetch('https://apis.ccbp.in/jobs', options)
     const data = await response.json()
+    const updatedData = data.jobs.map(each => ({
+      companyLogoUrl: each.company_logo_url,
+      employmentType: each.employment_type,
+      id: each.id,
+      jobDescription: each.job_description,
+      location: each.location,
+      packagePerAnnum: each.package_per_annum,
+      rating: each.rating,
+      title: each.title,
+    }))
+    this.setState({jobsList: updatedData})
     console.log(data)
+    console.log(updatedData)
   }
 
   render() {
+    const {jobsList, userAuthorized} = this.state
     const {profileData} = this.state
     const {name, profileImageUrl, shortBio} = profileData
     return (
@@ -62,7 +87,7 @@ export default class Jobs extends Component {
               </div>
               <hr />
               <div>
-                <h1>Type of Employment</h1>
+                <h1 className="headingText">Type of Employment</h1>
                 <div className="inputCard">
                   <input className="checkbox" id="fullTime" type="checkbox" />
                   <label htmlFor="fullTime">Full Time</label>
@@ -82,7 +107,7 @@ export default class Jobs extends Component {
               </div>
               <hr />
               <div>
-                <h1>Salary Range</h1>
+                <h1 className="headingText">Salary Range</h1>
                 <div className="inputCard">
                   <input
                     className="checkbox"
@@ -128,6 +153,25 @@ export default class Jobs extends Component {
               <button className="searchbtn" type="button">
                 <BsSearch className="search-icon" />
               </button>
+            </div>
+            <div>
+              {userAuthorized ? (
+                <ul>
+                  {jobsList.map(each => (
+                    <JobItem key={each.id} details={each} />
+                  ))}
+                </ul>
+              ) : (
+                <div>
+                  <img
+                    src="https://assets.ccbp.in/frontend/react-js/failure-img.png"
+                    alt="failure view"
+                  />
+                  <h1>Oops! Something Went Wrong</h1>
+                  <p>We cannot seem to find the page you are looking for.</p>
+                  <button onClick={this.retry}>Retry</button>
+                </div>
+              )}
             </div>
           </div>
         </div>

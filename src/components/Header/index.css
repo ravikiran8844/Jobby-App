@@ -5,14 +5,14 @@
   align-items: center;
   padding: 10px;
 }
-li {
+.listItems {
   list-style: none;
   font-weight: 700;
   color: #fff;
   margin-right: 20px;
   text-decoration: none;
 }
-ul {
+.headerlist {
   display: flex;
 }
 

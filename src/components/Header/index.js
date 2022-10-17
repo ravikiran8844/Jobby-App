@@ -22,15 +22,15 @@ class Header extends Component {
             />
           </Link>
         </div>
-        <ul>
+        <ul className="headerlist">
           <Link to="/">
-            <li>Home</li>
+            <li className="listItems">Home</li>
           </Link>
           <Link to="/jobs">
-            <li>Jobs</li>
+            <li className="listItems">Jobs</li>
           </Link>
 
-          <li>
+          <li className="listItems">
             <button onClick={this.getLogout} className="logout">
               Logout
             </button>

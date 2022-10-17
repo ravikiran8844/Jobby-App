@@ -1,7 +1,8 @@
 .homeContainer {
   background-image: url('https://assets.ccbp.in/frontend/react-js/home-lg-bg.png');
-  height: 100vh;
+  height: auto;
   background-size: cover;
+  height: 100vh;
   padding: 40px;
 }
 * {
