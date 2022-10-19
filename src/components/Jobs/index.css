@@ -1,62 +1,6 @@
-* {
-  box-sizing: border-box;
-  margin: 0;
-}
-.profile {
-  background-image: url('https://assets.ccbp.in/frontend/react-js/profile-bg.png');
-  width: 250px;
-  height: 200px;
-  background-size: cover;
-  border-radius: 30px;
-  padding: 20px;
-}
-.jobs {
-  background-color: black;
-  height: auto;
-  padding: 30px;
+.job-profile-container {
+  background-color: #000000;
   display: flex;
-}
-
-.profileName {
-  font-size: 20px;
-  font-weight: 600;
-  color: #6366f1;
-}
-.profileBio {
-  color: #272727;
-  font-size: 14px;
-}
-.checkbox {
-  width: 20px;
-  height: 20px;
-  margin-right: 5px;
-  padding: 5px;
-}
-
-.inputCard {
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-}
-.searchBox {
-  display: flex;
-  border: 1px solid #64748b;
-  border-radius: 10px;
-  width: 300px;
-}
-.search-icon {
-}
-.searchbtn {
-  background-color: #272727;
-}
-.searchbar {
-  border: 0;
-  outline: none;
-  width: 300px;
-}
-.content {
-  padding: 0px 30px;
-}
-.headingText {
-  font-size: 30px;
+  justify-content: space-around;
+  padding: 25px;
 }
